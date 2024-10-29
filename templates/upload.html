@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Resizer</title>
+</head>
+<body>
+    <h1>Image Upload and Resize</h1>
+    <form action="/upload/" enctype="multipart/form-data" method="post">
+        <input type="file" name="file">
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if original_resolution %}
+    <p>Original Image Resolution: {{ original_resolution }}</p>
+    <form action="/resize/" method="post">
+        <input type="hidden" name="file_name" value="{{ file_name }}">
+        <label for="resize_percentage">Resize Percentage:</label>
+        <input type="number" name="resize_percentage" min="1" max="100" value="50">
+        <button type="submit">Resize</button>
+    </form>
+    {% endif %}
+
+    {% if output_path %}
+    <p><a href="/uploads/{{ output_path }}" download>Download Resized Image</a></p>
+    {% endif %}
+</body>
+</html>
